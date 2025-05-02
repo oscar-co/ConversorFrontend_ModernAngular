@@ -1,0 +1,7 @@
+/* Oculta las imágenes en pantallas menores a 768px */
+@media screen and (max-width: 768px) {
+    .d-none.d-md-block {
+      display: none !important;
+    }
+  }
+  

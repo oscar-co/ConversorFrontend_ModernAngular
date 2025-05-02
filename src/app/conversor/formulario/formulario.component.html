@@ -1,0 +1,55 @@
+<form [formGroup]="forma">
+    <div class="row my-1">
+      <div class="input-group">
+        <div class="input-group-prepend label_units">
+          <label class="input-group-text label_units" for="magnitud">Magnitud</label>
+        </div>
+        <select formControlName="sMagnitud" class="custom-select" (change)="magnitudChange($event)">
+            <option value="temperatura">Temperatura</option>
+          <option value="presion">Presión</option>
+          <option value="masa">Masa</option>
+          <option value="longitud">Longitud</option>
+          <option value="area">Área</option>
+        </select>
+      </div>
+    </div>
+  
+    <div class="row my-1">
+      <div class="input-group">
+        <div class="input-group-prepend label_units">
+          <label class="input-group-text label_units">Unidad Entrada</label>
+        </div>
+        <select class="custom-select" formControlName="uEntrada" (change)="convertir()">
+          <option *ngFor="let unidad of unidades" [value]="unidad">{{ unidad }}</option>
+        </select>
+      </div>
+  
+      <div class="input-group">
+        <div class="input-group-prepend label_units">
+          <label class="input-group-text label_units">Unidad Salida</label>
+        </div>
+        <select class="custom-select" formControlName="uSalida" [(ngModel)]="uniSalida" (ngModelChange)="convertir()">
+          <option *ngFor="let unidad of unidades" [value]="unidad">{{ unidad }}</option>
+        </select>
+      </div>
+  
+      <div class="input-group">
+        <div class="input-group-prepend label_units">
+          <label class="input-group-text label_units">Valor Entrada</label>
+        </div>
+        <input type="number" class="form-control" placeholder="Introduzca V. Entrada" formControlName="vEntrada" (keyup)="convertir()">
+    </div>
+  </div>
+
+  <div class="row my-1">
+    <div class="card w-100">
+      <div class="card-body p-3">
+        <h5 class="card-title">Resultado</h5>
+        <p class="card-text">
+          El resultado de la conversión es <b *ngIf="showResult">{{ result }}</b> {{ uniSalida }}
+        </p>
+        <button type="button" (click)="resetForm()" class="btn btn-primary">Borrar</button>
+      </div>
+    </div>
+  </div>
+</form>
