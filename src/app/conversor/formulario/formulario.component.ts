@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ConversorService } from '../../services/conversor.service';
+import * as bootstrap from 'bootstrap';
 
 @Component({
   selector: 'app-formulario',
@@ -16,24 +17,33 @@ export class FormularioComponent {
 
   unidades: string[] = [];
   result: number = 0;
-  uniSalida: string = '';
   showResult: boolean = false;
+  resultFormatted: string = '';
 
   constructor(
     private fb: FormBuilder,
     private conversorService: ConversorService
   ) {
     this.forma = this.fb.group({
-      sMagnitud: ['', Validators.required],
-      uEntrada: ['', Validators.required],
-      uSalida: ['', Validators.required],
-      vEntrada: ['', Validators.required]
+      magnitud: ['', Validators.required],
+      inputUnit: ['', Validators.required],
+      outputUnit: ['', Validators.required],
+      inputValue: ['', Validators.required]
     });
   }
 
   magnitudChange(event: Event): void {
+
     const value = (event.target as HTMLSelectElement).value;
-    this.forma.patchValue({ vEntrada: '' });
+    //const magnitud = this.forma.get('magnitud')?.value;
+    this.unidades = [];
+
+    this.forma.reset({
+      magnitud: value,
+      inputUnit: '',
+      outputUnit: '',
+      inputValue: ''
+    });
     this.limpiarValoresSalida();
   
     this.conversorService.getUnidadesPorMagnitud(value).subscribe(resp => {
@@ -44,10 +54,14 @@ export class FormularioComponent {
   convertir(): void {
     if (this.forma.valid) {
       this.conversorService.getCambio(this.forma).subscribe(resp => {
-        this.result = resp['resultado'];
+        this.result = Number(resp.outputValue.toPrecision(2));
+        this.resultFormatted = this.result.toLocaleString('es-ES', {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 10
+        });
+
+        this.showResult = true;
       });
-      this.uniSalida = this.forma.get('uSalida')?.value;
-      this.showResult = true;
     } else {
       if (this.result !== 0) {
         this.limpiarValoresSalida();
@@ -57,12 +71,21 @@ export class FormularioComponent {
 
   resetForm(): void {
     this.forma.reset();
-    this.uniSalida = '';
     this.limpiarValoresSalida();
   }
 
   limpiarValoresSalida(): void {
     this.result = 0;
     this.showResult = false;
+  }
+
+  copiarResultado(): void {
+    navigator.clipboard.writeText('El resultado es: ' + this.resultFormatted + ' ' + this.forma.get('outputUnit')?.value || '').then(() => {
+      const toastEl = document.getElementById('copyToast');
+      if (toastEl) {
+        const toast = new bootstrap.Toast(toastEl);
+        toast.show();
+      }
+    });
   }
 }

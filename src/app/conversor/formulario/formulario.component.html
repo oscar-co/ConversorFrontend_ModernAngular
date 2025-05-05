@@ -1,55 +1,77 @@
-<form [formGroup]="forma">
-    <div class="row my-1">
-      <div class="input-group">
-        <div class="input-group-prepend label_units">
-          <label class="input-group-text label_units" for="magnitud">Magnitud</label>
-        </div>
-        <select formControlName="sMagnitud" class="custom-select" (change)="magnitudChange($event)">
-            <option value="temperatura">Temperatura</option>
-          <option value="presion">Presión</option>
-          <option value="masa">Masa</option>
-          <option value="longitud">Longitud</option>
-          <option value="area">Área</option>
-        </select>
-      </div>
-    </div>
+<form [formGroup]="forma" class="p-4 shadow rounded bg-white" style="max-width: 500px; margin: auto;">
   
-    <div class="row my-1">
-      <div class="input-group">
-        <div class="input-group-prepend label_units">
-          <label class="input-group-text label_units">Unidad Entrada</label>
-        </div>
-        <select class="custom-select" formControlName="uEntrada" (change)="convertir()">
-          <option *ngFor="let unidad of unidades" [value]="unidad">{{ unidad }}</option>
-        </select>
-      </div>
-  
-      <div class="input-group">
-        <div class="input-group-prepend label_units">
-          <label class="input-group-text label_units">Unidad Salida</label>
-        </div>
-        <select class="custom-select" formControlName="uSalida" [(ngModel)]="uniSalida" (ngModelChange)="convertir()">
-          <option *ngFor="let unidad of unidades" [value]="unidad">{{ unidad }}</option>
-        </select>
-      </div>
-  
-      <div class="input-group">
-        <div class="input-group-prepend label_units">
-          <label class="input-group-text label_units">Valor Entrada</label>
-        </div>
-        <input type="number" class="form-control" placeholder="Introduzca V. Entrada" formControlName="vEntrada" (keyup)="convertir()">
-    </div>
+  <div class="bg-success text-white text-center p-3 rounded shadow mb-4">
+    <h1 class="mb-0">
+      <i class="fas fa-ruler-combined me-2"></i> Conversor de Unidades
+    </h1>
+  </div>
+
+  <div class="mb-3">
+    <label for="magnitud" class="form-label">Magnitud</label>
+    <select formControlName="magnitud" id="magnitud" class="form-select" (change)="magnitudChange($event)">
+      <option value="">Selecciona una magnitud</option>
+      <option value="temperatura">Temperatura</option>
+      <option value="presion">Presión</option>
+      <option value="masa">Masa</option>
+      <option value="longitud">Longitud</option>
+      <option value="area">Área</option>
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Unidad de Entrada</label>
+    <select formControlName="inputUnit" class="form-select" (change)="convertir()">
+      <option *ngFor="let unidad of unidades" [value]="unidad">{{ unidad }}</option>
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Unidad de Salida</label>
+    <select formControlName="outputUnit" class="form-select" (change)="convertir()">
+      <option *ngFor="let unidad of unidades" [value]="unidad">{{ unidad }}</option>
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Valor de Entrada</label>
+    <input type="number" class="form-control" formControlName="inputValue" (keyup)="convertir()">
   </div>
 
   <div class="row my-1">
-    <div class="card w-100">
-      <div class="card-body p-3">
-        <h5 class="card-title">Resultado</h5>
-        <p class="card-text">
-          El resultado de la conversión es <b *ngIf="showResult">{{ result }}</b> {{ uniSalida }}
+    <div class="col-12">
+      <div class="position-relative alert alert-success p-3">
+        <button type="button"
+                class="btn btn-sm btn-light position-absolute top-0 end-0 m-2"
+                (click)="copiarResultado()"
+                title="Copiar al portapapeles"
+                [disabled]="!showResult">
+          <i class="fas fa-copy"></i>
+        </button>
+  
+        <h5 class="mb-2">Resultado</h5>
+        <p class="mb-0" *ngIf="showResult">
+          El resultado de la conversión es
+          <b>{{ resultFormatted }}</b> {{ forma.get('outputUnit')?.value }}
         </p>
-        <button type="button" (click)="resetForm()" class="btn btn-primary">Borrar</button>
+        <p class="mb-0 text-muted fst-italic" *ngIf="!showResult">
+          Aquí se mostrará el resultado de la conversión.
+        </p>
       </div>
     </div>
   </div>
+
+  <div class="d-grid gap-2">
+    <button type="button" (click)="resetForm()" class="btn btn-outline-secondary">Limpiar</button>
+  </div>
 </form>
+
+
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1055">
+  <div id="copyToast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body">
+        Resultado copiado al portapapeles.
+      </div>
+    </div>
+  </div>
+</div>

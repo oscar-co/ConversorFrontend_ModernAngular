@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { IncertidumbreResponse } from '../models/incertidumbre-response.model';
 import { CambioResponse } from '../models/cambio-response.model';
 import { environment } from '../../environments/environment';
+import { ConversionData } from '../models/conversion-data.model';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -36,17 +37,17 @@ export class ConversorService {
    */
   getPatronesPorMagnitudYUnidad(formaPat: FormGroup): Observable<string[]> {
     return this.http.post<PatronesResponse>(`${this.url}/patrones-disponibles`, formaPat.value).pipe(
-      map(resp => resp.data.map(p => p.nameIdentify)) // <- aquí extraes solo nameIdentify
+      map(resp => resp.data.map(p => p.nameIdentify))
     );
   }
 
   /**
    * Devuelve resultado de conversión en función del formulario.
    */
-  getCambio(forma: FormGroup): Observable<CambioResponse> {
-    const json = JSON.stringify(forma.value);
-    const params = `json=${json}`;
-    return this.http.post<CambioResponse>(`${this.url}/cambio`, params, httpOptions);
+  getCambio(forma: FormGroup): Observable<ConversionData> {
+    return this.http.post<CambioResponse>(`${this.url}/cambio`, forma.value).pipe(
+      map(resp => resp.data)
+    );
   }
 
   /**
