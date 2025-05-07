@@ -1,11 +1,14 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { ConversorComponent } from './conversor/conversor.component';
-import { ConversionPatronComponent } from './patrones/conversion-patron/conversion-patron.component';
+import { AppComponent } from './app.component';
+import { AboutComponent } from './portfolio/about/about.component';
+import { PortfolioComponent } from './portfolio/portfolio.component';
 
 export const routes: Routes = [
-  { path: 'home', component: HomeComponent, title: 'Inicio' },
-  { path: 'conversor', component: ConversorComponent, title: 'Conversor' },
-  { path: 'conversorPatron', component: ConversionPatronComponent, title: 'Conversor Patrón' },
-  { path: '**', redirectTo: 'home', pathMatch: 'full' }
+  { path: '', redirectTo: 'portfolio', pathMatch: 'full' },
+  { path: 'portfolio', component: PortfolioComponent },
+  {
+    path: 'conversor-project',
+    loadChildren: () =>
+      import('./conversor/conversor.routes').then(m => m.CONVERSOR_ROUTES)
+  }
 ];

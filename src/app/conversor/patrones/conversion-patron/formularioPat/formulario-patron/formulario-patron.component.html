@@ -1,0 +1,85 @@
+<form [formGroup]="formaPat" class="p-4 shadow rounded bg-white" style="max-width: 500px; margin: auto;">
+
+  <!-- Cabecera -->
+  <div class="bg-dark text-white text-center p-3 rounded shadow mb-5">
+    <h3 class="mb-0">
+      <i class="fas fa-stream me-2"></i> Conversor con Patrón
+    </h3>
+  </div>
+
+  <!-- Magnitud -->
+  <div class="mb-3">
+    <label for="magnitud" class="form-label">Magnitud</label>
+    <select id="magnitud" formControlName="magnitud" class="form-select" (change)="magnitudChange($event)">
+      <option value="" disabled selected>Seleccione una magnitud</option>
+      <option value="temperatura">Temperatura</option>
+      <option value="presion">Presión</option>
+      <option value="masa">Masa</option>
+      <option value="longitud">Longitud</option>
+      <option value="area">Área</option>
+    </select>
+  </div>
+
+  <!-- Unidad de entrada -->
+  <div class="mb-3">
+    <label for="inputUnit" class="form-label">Unidad de Entrada</label>
+    <select id="inputUnit" formControlName="inputUnit" class="form-select" (change)="convertir()">
+      <option value="" disabled selected>Seleccione unidad</option>
+      <option *ngFor="let unidad of unidades" [value]="unidad">{{ unidad }}</option>
+    </select>
+  </div>
+
+  <!-- Valor de entrada -->
+  <div class="mb-3">
+    <label for="inputValue" class="form-label">Valor de Entrada</label>
+    <input id="inputValue" type="number" formControlName="inputValue" class="form-control" placeholder="Introduzca V. Entrada" (keyup)="convertir()">
+  </div>
+
+  <!-- Patrón -->
+  <div class="mb-3">
+    <label for="patron" class="form-label">Patrón</label>
+    <select id="patron" formControlName="patron" class="form-select" (change)="calcularInc()">
+      <option value="" disabled selected>Seleccione patrón</option>
+      <option *ngFor="let patron of patrones" [value]="patron">{{ patron }}</option>
+    </select>
+  </div>
+
+  <!-- Resultado -->
+  <div class="row my-1">
+    <div class="col-12">
+      <div class="position-relative alert alert-success p-3">
+        <button type="button"
+                class="btn btn-sm btn-light position-absolute top-0 end-0 m-2"
+                (click)="copiarResultado()"
+                title="Copiar al portapapeles"
+                [disabled]="!showResult">
+          <i class="fas fa-copy"></i>
+        </button>
+        <h5 class="mb-2">Resultado</h5>
+        <p class="mb-0" *ngIf="showResult">
+          La Incertidmbre del patrón es
+          <b>{{ incertidumbrePatron }}</b> {{ uniSalida }}
+        </p>
+        <p class="mb-0 text-muted fst-italic" *ngIf="!showResult && !errorMessage">
+          Aquí se mostrará el resultado de la Incertidmbre.
+        </p>
+        <p *ngIf="errorMessage" class="mb-0 text-danger">{{ errorMessage }}</p>
+        <div class="d-grid gap-2 mt-3">
+          <button type="button" (click)="resetForm()" class="btn btn-outline-dark">Borrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</form>
+
+<!-- Toast -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1055">
+  <div id="copyToast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body">
+        Resultado copiado al portapapeles.
+      </div>
+    </div>
+  </div>
+</div>

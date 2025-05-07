@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { ConversorService } from '../../services/conversor.service';
 import * as bootstrap from 'bootstrap';
+import { ConversorService } from '../../../services/conversor.service';
 
 @Component({
   selector: 'app-formulario',

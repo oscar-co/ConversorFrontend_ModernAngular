@@ -8,6 +8,7 @@ import { IncertidumbreResponse } from '../models/incertidumbre-response.model';
 import { CambioResponse } from '../models/cambio-response.model';
 import { environment } from '../../environments/environment';
 import { ConversionData } from '../models/conversion-data.model';
+import { UncertaintyByPtnDTO } from '../models/uncertaintyByPtn.model';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -54,10 +55,14 @@ export class ConversorService {
    * Devuelve la incertidumbre calculada en base al patrón y valor.
    */
   getIncertidumbrePorPatronYValor(formaPat: FormGroup): Observable<number> {
-    const json = JSON.stringify(formaPat.value);
-    const params = `json=${json}`;
-    return this.http.post<IncertidumbreResponse>(`${this.url}/incertidumbre-patron`, params, httpOptions).pipe(
-      map(resp => resp.data) // Solo extraemos el número
+    const data: UncertaintyByPtnDTO = {
+      inputUnit: formaPat.get('inputUnit')?.value,
+      inputValue: formaPat.get('inputValue')?.value,
+      nameIdentify: formaPat.get('patron')?.value
+    };    
+    
+    return this.http.post<IncertidumbreResponse>(`${this.url}/incertidumbre-patron`, data).pipe(
+      map(resp => resp.data)
     );
   }
 }

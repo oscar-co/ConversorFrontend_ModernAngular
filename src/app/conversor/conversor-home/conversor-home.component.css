@@ -1,0 +1,17 @@
+.btn-outline-dark {
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .btn-outline-dark:hover {
+    background-color: #343a40;
+    color: #fff;
+    transform: scale(1.03);
+  }
+  
+  .btn-outline-dark i {
+    transition: transform 0.2s ease;
+  }
+  
+  .btn-outline-dark:hover i {
+    transform: translateY(-2px) scale(1.2);
+  }

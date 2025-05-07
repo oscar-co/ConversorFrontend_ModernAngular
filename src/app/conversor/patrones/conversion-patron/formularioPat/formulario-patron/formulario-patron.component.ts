@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ConversorService } from '../../../services/conversor.service';
-import { Patron } from '../../../models/patron.model';
+import * as bootstrap from 'bootstrap';
+import { ConversorService } from '../../../../../services/conversor.service';
 
 @Component({
   selector: 'app-formulario-patron',
@@ -14,6 +14,7 @@ import { Patron } from '../../../models/patron.model';
 export class FormularioPatronComponent {
   
   formaPat: FormGroup;
+  resultFormatted: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -23,7 +24,7 @@ export class FormularioPatronComponent {
       magnitud: ['', Validators.required],
       inputUnit: ['', Validators.required],
       inputValue: ['', Validators.required],
-      // patron: ['']
+      patron: ['']
     });
   }
 
@@ -39,22 +40,34 @@ export class FormularioPatronComponent {
   
 
   magnitudChange(event: Event): void {
-    const magnitud = (event.target as HTMLSelectElement).value;
-    this.formaPat.patchValue({
-      vEntradaPat: '',
-      patronPat: ''
-    });
-    this.showResult = false;
-    this.errorMessage = '';
 
-    this.conversorService.getUnidadesPorMagnitud(magnitud).subscribe(
-      resp => this.unidades = resp
-    );
+    const value = (event.target as HTMLSelectElement).value;
+    this.unidades = [];
+
+    this.formaPat.reset({
+      magnitud: value,
+      inputUnit: '',
+      outputUnit: '',
+      inputValue: ''
+    });
+    this.limpiarValoresSalida();
+  
+    this.conversorService.getUnidadesPorMagnitud(value).subscribe(resp => {
+      this.unidades = resp;
+    });
   }
 
   convertir(): void {
+    const inputValue = this.formaPat.get('inputValue')?.value;
+
+    if (!inputValue) {
+      this.patrones = [];
+      this.formaPat.patchValue({ patron: '' });
+      this.limpiarValoresSalidaConservUnits();
+      return;
+    }
     if (!this.formaPat.valid) return;
-  
+
     this.conversorService.getPatronesPorMagnitudYUnidad(this.formaPat).subscribe({
       next: (nameIdentifyList: string[]) => {
         this.patrones = nameIdentifyList;
@@ -62,7 +75,7 @@ export class FormularioPatronComponent {
         if (nameIdentifyList.length === 0) {
           this.showResult = false;
           this.errorMessage = 'Fuera de rango';
-          this.formaPat.patchValue({ patronPat: '' });
+          this.formaPat.patchValue({ patron: '' });
           return;
         }
   
@@ -71,29 +84,57 @@ export class FormularioPatronComponent {
         this.calcularInc();
       },
       error: () => {
-        this.showResult = false;
+        this.showResult = true;
         this.errorMessage = 'Error al obtener los patrones';
       }
     });
   }
-  
 
   calcularInc(): void {
-    const control = this.formaPat.get('patronPat');
-    const patron = control?.value;
+    const patron = this.formaPat.get('patron')?.value;
   
     if (patron !== null && patron !== undefined && patron !== '') {
       this.conversorService.getIncertidumbrePorPatronYValor(this.formaPat).subscribe((valor: number) => {
         this.incertidumbrePatron = valor;
+        this.result = Number(this.incertidumbrePatron.toPrecision(2));
+        this.resultFormatted = this.result.toLocaleString('es-ES', {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 10
+        });
       });
-  
       this.showResult = true;
     }
   }
 
+  limpiarValoresSalida(): void {
+    this.result = 0;
+    this.showResult = false;
+    this.errorMessage = '';
+    this.unidades = [];
+    this.patrones = [];
+  }
+
+  limpiarValoresSalidaConservUnits(): void {
+    this.result = 0;
+    this.showResult = false;
+    this.errorMessage = '';
+    this.patrones = [];
+  }
+
   resetForm() {
     this.formaPat.reset();
-    this.showResult = false;
+    //this.showResult = false;
     this.uniSalida = '';
+    this.limpiarValoresSalida();
   }
+
+  copiarResultado(): void {
+      navigator.clipboard.writeText('El resultado es: ' + this.incertidumbrePatron + ' ' + this.uniSalida || '').then(() => {
+        const toastEl = document.getElementById('copyToast');
+        if (toastEl) {
+          const toast = new bootstrap.Toast(toastEl);
+          toast.show();
+        }
+      });
+    }
 }

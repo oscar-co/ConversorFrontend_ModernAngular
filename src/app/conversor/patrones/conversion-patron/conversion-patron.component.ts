@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormularioPatronComponent } from "../formularioPat/formulario-patron/formulario-patron.component";
+import { FormularioPatronComponent } from './formularioPat/formulario-patron/formulario-patron.component';
 
 @Component({
   selector: 'app-conversion-patron',

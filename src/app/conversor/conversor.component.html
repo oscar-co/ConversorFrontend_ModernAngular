@@ -1,5 +1,11 @@
-<div class="container-fluid min-vh-100 d-flex flex-column justify-content-start justify-content-lg-center align-items-center bg-dark py-5">
-  <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
-    <app-formulario></app-formulario>
+<app-navbar-conversor></app-navbar-conversor>
+
+<div class="d-flex flex-column min-vh-100" style="padding-top: 80px;">
+  <div class="flex-grow-1 container-fluid">
+    <router-outlet></router-outlet>
   </div>
+
+  <footer class="text-center text-muted py-3 small">
+    © 2025 Óscar Carrero. Conversor
+  </footer>
 </div>

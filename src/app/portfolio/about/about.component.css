@@ -1,0 +1,72 @@
+.section-title {
+    position: relative;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .section-title::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(to right, #4cad80, #1c4834);
+    margin: 16px auto 0;
+    border-radius: 2px;
+  }
+  
+  .avatar-wrapper {
+    padding: 10px;
+    display: flex;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid transparent;
+    background-image: linear-gradient(white, white), linear-gradient(45deg, #4cad80, #00ffff);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+  }
+
+  .tech-card {
+    height: 130px;     /* Antes 110 o 140 */
+    width: 130px;
+    padding: 10px;
+  }
+
+  .tech-card img {
+    width: 70px;       /* Entre 48px y 64px */
+    height: 70px;
+    object-fit: contain;
+    pointer-events: none;
+  }
+
+  .tech-card p {
+    font-size: 0.8rem;  /* Antes: 0.9rem */
+    margin: 4px 0 0;
+  }
+  
+  .avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  
+  .about-section {
+    font-family: 'Segoe UI' sans-serif;
+  }
+  
+  .about-intro {
+    font-size: 1.2rem;
+    line-height: 1.7;
+    color: #dcdcdc;
+    text-align: justify;
+  }
+  

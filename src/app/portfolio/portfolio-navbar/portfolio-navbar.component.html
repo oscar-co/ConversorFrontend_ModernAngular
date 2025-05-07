@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow pb-4 fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand px-2" [routerLink]="['/']">
+        <i class="fas fa-ruler-combined me-2"></i> OC
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <div class="collapse navbar-collapse" id="navbarNav" #navbarCollapse>
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item mx-2">
+            <a class="nav-link" [routerLink]="['/']" (click)="navbarCollapse.classList.remove('show')">Home</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link"  (click)="navbarCollapse.classList.remove('show')">About</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link" [routerLink]="['/conversor-project']" (click)="navbarCollapse.classList.remove('show')">Projects</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link"  (click)="navbarCollapse.classList.remove('show')">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
