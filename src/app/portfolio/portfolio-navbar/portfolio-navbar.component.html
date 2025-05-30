@@ -14,13 +14,14 @@
             <a class="nav-link" [routerLink]="['/']" (click)="navbarCollapse.classList.remove('show')">Home</a>
           </li>
           <li class="nav-item mx-2">
-            <a class="nav-link"  (click)="navbarCollapse.classList.remove('show')">About</a>
+            <a class="nav-link" (click)="scrollToSection('about')">About</a>
           </li>
           <li class="nav-item mx-2">
-            <a class="nav-link" [routerLink]="['/conversor-project']" (click)="navbarCollapse.classList.remove('show')">Projects</a>
+            <a class="nav-link" (click)="scrollToSection('projects')">Projects</a>
+            <!-- <a class="nav-link" [routerLink]="['/conversor-project']" (click)="navbarCollapse.classList.remove('show')">Projects</a> -->
           </li>
           <li class="nav-item mx-2">
-            <a class="nav-link"  (click)="navbarCollapse.classList.remove('show')">Contact</a>
+            <a class="nav-link" (click)="scrollToSection('contact')">Contact</a>
           </li>
         </ul>
       </div>

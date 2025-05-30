@@ -1,1 +1,40 @@
-<p>contact works!</p>
+<div id="contact" class="container-fluid bg-dark text-light p-5 min-vh-100 contact-section">
+  <h2 class="text-center display-4 mb-5 section-title contact-title">
+    Contact <span class="highlight">Me</span>
+  </h2>
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="p-4 border rounded bg-secondary bg-opacity-10">
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre</label>
+          <input id="nombre" class="form-control" formControlName="nombre" />
+          <div class="form-text text-warning" *ngIf="contactForm.get('nombre')?.invalid && contactForm.get('nombre')?.touched">
+            Nombre es requerido (mínimo 2 caracteres).
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input id="email" class="form-control" type="email" formControlName="email" />
+          <div class="form-text text-warning" *ngIf="contactForm.get('email')?.invalid && contactForm.get('email')?.touched">
+            Email inválido.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="mensaje" class="form-label">Mensaje</label>
+          <textarea id="mensaje" class="form-control" formControlName="mensaje" rows="5"></textarea>
+          <div class="form-text text-warning" *ngIf="contactForm.get('mensaje')?.invalid && contactForm.get('mensaje')?.touched">
+            Mensaje es requerido (mínimo 10 caracteres).
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-success w-100" [disabled]="contactForm.invalid">Enviar</button>
+      </form>
+
+      <div *ngIf="enviado" class="alert alert-success text-center mt-4" role="alert">
+        ¡Mensaje enviado con éxito!
+      </div>
+    </div>
+  </div>
+</div>
