@@ -1,0 +1,32 @@
+<div [formGroup]="formGroup" class="border p-3 mb-3 rounded bg-light">
+  <h5 class="text-secondary">Medición</h5>
+
+  <div class="row g-3">
+    <div class="col-md-4">
+      <label class="form-label">Referencia</label>
+      <input type="number" class="form-control" formControlName="reference">
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Lectura instrumento</label>
+      <input type="number" class="form-control" formControlName="instrumentReading">
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Corrección</label>
+      <input type="number" class="form-control" formControlName="correction">
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Incertidumbre</label>
+      <input type="number" class="form-control" formControlName="uncertainty">
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Temp. ambiente</label>
+      <input type="number" class="form-control" formControlName="ambientTemp">
+    </div>
+  </div>
+
+  <div class="text-end mt-2">
+    <button type="button" class="btn btn-outline-danger btn-sm" (click)="onRemove()">
+      <i class="fas fa-trash-alt"></i> Eliminar
+    </button>
+  </div>
+</div>

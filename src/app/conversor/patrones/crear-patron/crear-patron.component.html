@@ -1,0 +1,63 @@
+<form [formGroup]="formCert" (ngSubmit)="submitForm()" class="p-4 shadow rounded bg-white" style="max-width: 700px; margin: auto;">
+  <div class="bg-dark text-white text-center p-3 rounded shadow mb-4">
+    <h3 class="mb-0"><i class="fas fa-certificate me-2"></i> Crear Patrón / Certificado</h3>
+  </div>
+
+  <!-- Datos del certificado -->
+  <div class="mb-3">
+    <label class="form-label">Nº Certificado</label>
+    <input formControlName="certificateNumber" type="text" class="form-control">
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Tipo</label>
+    <input formControlName="insType" type="text" class="form-control">
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Marca</label>
+    <input formControlName="brand" type="text" class="form-control">
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Modelo</label>
+    <input formControlName="model" type="text" class="form-control">
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Identificador</label>
+    <input formControlName="nameIdentify" type="text" class="form-control">
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Descripción</label>
+    <textarea formControlName="description" class="form-control"></textarea>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Fecha emisión</label>
+    <input formControlName="issueDate" type="date" class="form-control">
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Unidad</label>
+    <input formControlName="unit" type="text" class="form-control">
+  </div>
+
+  <!-- Mediciones -->
+  <div formArrayName="measurements">
+    <div *ngFor="let measurement of measurements.controls; let i = index" [formGroupName]="i">
+      <app-measurement [formGroup]="measurement" (remove)="removeMeasurement(i)"></app-measurement>
+    </div>
+  </div>
+
+  <div class="text-end">
+    <button type="button" class="btn btn-outline-primary" (click)="addMeasurement()">
+      <i class="fas fa-plus"></i> Añadir Medición
+    </button>
+  </div>
+
+  <div class="text-center mt-4">
+    <button type="submit" class="btn btn-success">Enviar Certificado</button>
+  </div>
+</form>

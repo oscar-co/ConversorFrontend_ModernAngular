@@ -20,9 +20,32 @@
           <a class="nav-link" [routerLink]="['/conversor-project/conversor-unidades']"
             (click)="navbarCollapse.classList.remove('show')">Conversor Unidades</a>
         </li>
-        <li class="nav-item mx-2">
-          <a class="nav-link" [routerLink]="['/conversor-project/conversor-patrones']"
-            (click)="navbarCollapse.classList.remove('show')">Conversor Patrones</a>
+        <li class="nav-item dropdown mx-2">
+          <a class="nav-link dropdown-toggle" href="#" id="conversorPatronesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Conversor Patrones
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="conversorPatronesDropdown">
+            <li>
+              <a class="dropdown-item" [routerLink]="['/conversor-project/show-certificate']" (click)="navbarCollapse.classList.remove('show')">
+                Mostrar Certificado
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/conversor-project/conversor-patrones']" (click)="navbarCollapse.classList.remove('show')">
+                Obtener Incertidumbre
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/conversor-project/conversor-patrones-crear-nuevo']" (click)="navbarCollapse.classList.remove('show')">
+                Añadir certificado
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/conversor-project/conversor-patrones/update']" (click)="navbarCollapse.classList.remove('show')">
+                Actualizar certificado
+              </a>
+            </li>
+          </ul>
         </li>
       </ul>
     </div>
