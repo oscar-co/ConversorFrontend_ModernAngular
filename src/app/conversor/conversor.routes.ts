@@ -4,6 +4,8 @@ import { ConversorHomeComponent } from './conversor-home/conversor-home.componen
 import { ConversionPatronComponent } from './patrones/conversion-patron/conversion-patron.component';
 import { ConversorUnidadesComponent } from './conversor-unidades/conversor-unidades.component';
 import { CrearPatronComponent } from './patrones/crear-patron/crear-patron.component';
+import { MostrarPatronComponent } from './patrones/mostrar-patrones/mostrar-patron/mostrar-patron.component';
+import { MostrarPatronesComponent } from './patrones/mostrar-patrones/mostrar-patrones.component';
 
 
 export const CONVERSOR_ROUTES: Routes = [
@@ -14,7 +16,9 @@ export const CONVERSOR_ROUTES: Routes = [
       { path: '', component: ConversorHomeComponent },
       { path: 'conversor-patrones', component: ConversionPatronComponent },
       { path: 'conversor-unidades', component: ConversorUnidadesComponent },
-      { path: 'conversor-patrones-crear-nuevo', component: CrearPatronComponent}
+      { path: 'conversor-patrones-crear-nuevo', component: CrearPatronComponent},
+      { path: 'conversor-patrones-mostrar-todos', component: MostrarPatronesComponent},
+      { path: 'conversor-patrones-mostrar/:id', component: MostrarPatronComponent}
     ]
   }
 ];

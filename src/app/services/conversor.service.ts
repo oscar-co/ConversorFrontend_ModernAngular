@@ -60,7 +60,6 @@ export class ConversorService {
       inputValue: formaPat.get('inputValue')?.value,
       nameIdentify: formaPat.get('patron')?.value
     };    
-    
     return this.http.post<IncertidumbreResponse>(`${this.url}/incertidumbre-patron`, data).pipe(
       map(resp => resp.data)
     );

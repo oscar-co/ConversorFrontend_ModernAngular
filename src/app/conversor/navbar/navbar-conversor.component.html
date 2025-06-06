@@ -26,8 +26,13 @@
           </a>
           <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="conversorPatronesDropdown">
             <li>
-              <a class="dropdown-item" [routerLink]="['/conversor-project/show-certificate']" (click)="navbarCollapse.classList.remove('show')">
+              <a class="dropdown-item" [routerLink]="['conversor-patrones-mostrar-todos']" (click)="navbarCollapse.classList.remove('show')">
                 Mostrar Certificado
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/conversor-projectconversor-patrones-mostrar/:id']" (click)="navbarCollapse.classList.remove('show')">
+                Mostrar Todos los Certificados
               </a>
             </li>
             <li>

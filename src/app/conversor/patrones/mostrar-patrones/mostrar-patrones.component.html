@@ -1,0 +1,35 @@
+<div class="container mt-5 pt-5">
+  <div class="card shadow">
+    <div class="card-header bg-dark text-white">
+      <h4 class="mb-0">Listado de Certificados (Patrones)</h4>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover align-middle text-center">
+          <thead class="table-dark">
+            <tr>
+              <th>#</th>
+              <th>Número</th>
+              <th>Instrumento</th>
+              <th>Marca</th>
+              <th>Modelo</th>
+              <th>Emitido</th>
+            </tr>
+          </thead>
+          <tbody>
+             <tr *ngFor="let patron of patrones; let i = index"
+                class="table-row-clickable"
+                [routerLink]="['conversor-patrones-mostrar', patron.id]">
+              <td>{{ i + 1 }}</td>
+              <td>{{ patron.certificateNumber }}</td>
+              <td>{{ patron.insType }}</td>
+              <td>{{ patron.brand }}</td>
+              <td>{{ patron.model }}</td>
+              <td>{{ patron.issueDate }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

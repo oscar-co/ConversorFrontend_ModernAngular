@@ -1,0 +1,47 @@
+<!-- <div class="container mt-5 pt-5">
+  <div class="card shadow">
+    <div class="card-header bg-dark text-white">
+      <h4 class="mb-0">Certificado Nº {{ patron?.certificateNumber }}</h4>
+    </div>
+
+    <div class="card-body">
+      <p><strong>Tipo de instrumento:</strong> {{ patron?.insType }}</p>
+      <p><strong>Marca:</strong> {{ patron?.brand }}</p>
+      <p><strong>Modelo:</strong> {{ patron?.model }}</p>
+      <p><strong>Identificación:</strong> {{ patron?.nameIdentify }}</p>
+      <p><strong>Descripción:</strong> {{ patron?.description }}</p>
+      <p><strong>Unidad de medida:</strong> {{ patron?.unit }}</p>
+      <p><strong>Fecha de emisión:</strong> {{ patron?.issueDate | date }}</p>
+
+      <hr />
+
+      <h5 class="mt-4">Mediciones</h5>
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped text-center align-middle">
+          <thead class="table-dark">
+            <tr>
+              <th>Referencia</th>
+              <th>Lectura instrumento</th>
+              <th>Corrección</th>
+              <th>Incertidumbre</th>
+              <th>Temp. ambiente (°C)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let m of patron?.measurements">
+              <td>{{ m.reference }}</td>
+              <td>{{ m.instrumentReading }}</td>
+              <td>{{ m.correction }}</td>
+              <td>{{ m.uncertainty }}</td>
+              <td>{{ m.ambientTemp }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <a routerLink="/conversor-project/conversor-patrones" class="btn btn-secondary mt-3">
+        ← Volver a lista
+      </a>
+    </div>
+  </div>
+</div> -->
