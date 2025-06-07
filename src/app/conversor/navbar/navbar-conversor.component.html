@@ -26,13 +26,8 @@
           </a>
           <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="conversorPatronesDropdown">
             <li>
-              <a class="dropdown-item" [routerLink]="['conversor-patrones-mostrar-todos']" (click)="navbarCollapse.classList.remove('show')">
-                Mostrar Certificado
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item" [routerLink]="['/conversor-projectconversor-patrones-mostrar/:id']" (click)="navbarCollapse.classList.remove('show')">
-                Mostrar Todos los Certificados
+              <a class="dropdown-item" [routerLink]="['mostrar-todos-patrones']" (click)="navbarCollapse.classList.remove('show')">
+                Mostrar todos los Certificados
               </a>
             </li>
             <li>
@@ -41,12 +36,12 @@
               </a>
             </li>
             <li>
-              <a class="dropdown-item" [routerLink]="['/conversor-project/conversor-patrones-crear-nuevo']" (click)="navbarCollapse.classList.remove('show')">
+              <a class="dropdown-item" [routerLink]="['/conversor-project/nuevo-patron']" (click)="navbarCollapse.classList.remove('show')">
                 Añadir certificado
               </a>
             </li>
             <li>
-              <a class="dropdown-item" [routerLink]="['/conversor-project/conversor-patrones/update']" (click)="navbarCollapse.classList.remove('show')">
+              <a class="dropdown-item" [routerLink]="['/conversor-project/update']" (click)="navbarCollapse.classList.remove('show')">
                 Actualizar certificado
               </a>
             </li>

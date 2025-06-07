@@ -19,7 +19,7 @@
           <tbody>
              <tr *ngFor="let patron of patrones; let i = index"
                 class="table-row-clickable"
-                [routerLink]="['conversor-patrones-mostrar', patron.id]">
+                [routerLink]="['/conversor-project/mostrar-patron', patron.id]">
               <td>{{ i + 1 }}</td>
               <td>{{ patron.certificateNumber }}</td>
               <td>{{ patron.insType }}</td>

@@ -15,16 +15,17 @@ export class CrearPatronComponent {
 
   constructor(private fb: FormBuilder) {
     this.formCert = this.fb.group({
-      certificateNumber: ['CERT-001', Validators.required, Validators.minLength(4), Validators.maxLength(24)],
-      insType: ['Temperatura', Validators.required, Validators.minLength(4), Validators.maxLength(24)],
-      brand: ['ThermoCo', Validators.required, Validators.minLength(4), Validators.maxLength(24)],
-      model: ['TH-1234567', Validators.required, Validators.minLength(2), Validators.maxLength(24)],
-      nameIdentify: ['PTN-001', Validators.required, Validators.minLength(4), Validators.maxLength(24)],
-      description: ['Certificado de calibración de ejemplo', Validators.minLength(4), Validators.maxLength(100)],
-      issueDate: ['2023-12-01', Validators.required],
-      unit: ['°C', Validators.required],
+      certificateNumber: ['CERT-001', [Validators.required, Validators.minLength(4), Validators.maxLength(24)]],
+      insType: ['Temperatura', [Validators.required, Validators.minLength(4), Validators.maxLength(24)]],
+      brand: ['ThermoCo', [Validators.required, Validators.minLength(4), Validators.maxLength(24)]],
+      model: ['TH-1234567', [Validators.required, Validators.minLength(2), Validators.maxLength(24)]],
+      nameIdentify: ['PTN-001', [Validators.required, Validators.minLength(4), Validators.maxLength(24)]],
+      description: ['Certificado de calibración de ejemplo', [Validators.minLength(4), Validators.maxLength(100)]],
+      issueDate: ['2023-12-01', [Validators.required]],
+      unit: ['°C', [Validators.required]],
       measurements: this.fb.array([] as FormGroup[])
     });
+
 
     // Datos de ejemplo
     this.addMeasurement({

@@ -21,7 +21,7 @@ export class MostrarPatronesComponent {
   ngOnInit(): void {
     this.patronesService.getAllPatrones().subscribe(response => {
       this.patrones = response.data;
-      console.log(response);
+      // console.log(response);
     });
   }
 }

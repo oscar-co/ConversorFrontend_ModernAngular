@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
-import { PatronesResponse } from '../models/patron.model';
+import { Patron, PatronDetailResponse, PatronesResponse } from '../models/patron.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,8 @@ export class PatronesService {
     return this.http.get<PatronesResponse>(this.url); 
   }
 
-  getPatronById(id: String): Observable<PatronesResponse>{
-    return this.http.get<PatronesResponse>(`${this.url}/${id}`); 
-  }
+  getPatronById(id: number): Observable<PatronDetailResponse> {
+  return this.http.get<PatronDetailResponse>(`${this.url}/${id}`);
+}
+
 }

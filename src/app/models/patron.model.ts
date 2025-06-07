@@ -27,4 +27,11 @@ export interface Medicion {
     data: Patron[];
     timestamp: string;
   }
+
+  export interface PatronDetailResponse {
+  status: string;
+  message: string;
+  data: Patron;
+  timestamp: string;
+}
   

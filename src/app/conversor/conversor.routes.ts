@@ -16,9 +16,9 @@ export const CONVERSOR_ROUTES: Routes = [
       { path: '', component: ConversorHomeComponent },
       { path: 'conversor-patrones', component: ConversionPatronComponent },
       { path: 'conversor-unidades', component: ConversorUnidadesComponent },
-      { path: 'conversor-patrones-crear-nuevo', component: CrearPatronComponent},
-      { path: 'conversor-patrones-mostrar-todos', component: MostrarPatronesComponent},
-      { path: 'conversor-patrones-mostrar/:id', component: MostrarPatronComponent}
+      { path: 'nuevo-patron', component: CrearPatronComponent},
+      { path: 'mostrar-todos-patrones', component: MostrarPatronesComponent},
+      { path: 'mostrar-patron/:id', component: MostrarPatronComponent}
     ]
   }
 ];
