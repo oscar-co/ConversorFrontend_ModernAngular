@@ -36,12 +36,12 @@
               </a>
             </li>
             <li>
-              <a class="dropdown-item" [routerLink]="['/conversor-project/nuevo-patron']" (click)="navbarCollapse.classList.remove('show')">
+              <a class="dropdown-item" *ngIf="isAdmin" [routerLink]="['/conversor-project/nuevo-patron']" (click)="navbarCollapse.classList.remove('show')">
                 Añadir certificado
               </a>
             </li>
             <li>
-              <a class="dropdown-item" [routerLink]="['/conversor-project/update']" (click)="navbarCollapse.classList.remove('show')">
+              <a class="dropdown-item" *ngIf="isAdmin" [routerLink]="['/conversor-project/update']" (click)="navbarCollapse.classList.remove('show')">
                 Actualizar certificado
               </a>
             </li>

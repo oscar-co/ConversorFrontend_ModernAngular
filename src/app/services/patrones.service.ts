@@ -9,7 +9,7 @@ import { Patron, PatronDetailResponse, PatronesResponse } from '../models/patron
 })
 export class PatronesService {
 
-  private url = environment.apiBaseUrl;
+  private url = environment.apiBaseUrl + "/patrones";
 
   constructor(private http: HttpClient) {}
 

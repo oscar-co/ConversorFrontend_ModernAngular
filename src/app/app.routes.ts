@@ -1,13 +1,18 @@
 import { Routes } from '@angular/router';
-import { AppComponent } from './app.component';
-import { AboutComponent } from './portfolio/about/about.component';
 import { PortfolioComponent } from './portfolio/portfolio.component';
+import { LoginComponent } from './login/login.component';
+import { AccessDeniedComponent } from './pages/access-denied/access-denied.component';
+import { AuthGuard } from './auth/auth.guard';
+
 
 export const routes: Routes = [
   { path: '', redirectTo: 'portfolio', pathMatch: 'full' },
   { path: 'portfolio', component: PortfolioComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'access-denied', component: AccessDeniedComponent },
   {
     path: 'conversor-project',
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import('./conversor/conversor.routes').then(m => m.CONVERSOR_ROUTES)
   }

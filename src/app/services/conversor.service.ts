@@ -22,7 +22,7 @@ const httpOptions = {
 export class ConversorService {
 
   private http = inject(HttpClient);
-  private url = environment.apiBaseUrl;
+  private url = environment.apiBaseUrl + "/patrones";
 
   /**
    * Devuelve las unidades disponibles según la magnitud.
