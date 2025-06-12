@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
 
@@ -11,11 +11,26 @@ import { CommonModule } from '@angular/common';
   styleUrl: './navbar-conversor.component.css'
 })
 export class NavbarConversorComponent {
+  constructor(private auth: AuthService, private router: Router) {}
 
-  constructor(private authService: AuthService) {}
-
-  get isAdmin(): boolean {
-    return this.authService.isAdmin();
+  get isLoggedIn(): boolean {
+    return this.auth.isLoggedIn();
   }
 
+  get isAdmin(): boolean {
+    return this.auth.isAdmin();
+  }
+
+  get username(): string {
+    return this.auth.getUsername() ?? 'Usuario';
+  }
+
+  get userRole(): string {
+    return this.auth.getUserRole() ?? '';
+  }
+
+  logout(): void {
+    this.auth.logout();
+    this.router.navigate(['/login']);
+  }
 }

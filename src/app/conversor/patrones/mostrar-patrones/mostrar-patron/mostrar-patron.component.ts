@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { Patron } from '../../../../models/patron.model';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { PatronesService } from '../../../../services/patrones.service';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
   selector: 'app-mostrar-patron',
@@ -17,10 +18,16 @@ export class MostrarPatronComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private patronesService: PatronesService
+    private patronesService: PatronesService,
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
+    if (!this.authService.isLoggedIn()) {
+      this.router.navigate(['/login']);
+      return;
+    }
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.patronesService.getPatronById(id).subscribe({
     next: response => {

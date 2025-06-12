@@ -47,6 +47,19 @@
             </li>
           </ul>
         </li>
+
+        <!-- Icono usuario -->
+        <li class="nav-item dropdown mx-2" *ngIf="isLoggedIn">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+             aria-expanded="false">
+            <i class="fas fa-user-circle me-1"></i> {{ username }}
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
+            <li><span class="dropdown-item-text">Rol: {{ userRole }}</span></li>
+            <li><hr class="dropdown-divider" /></li>
+            <li><button class="dropdown-item" (click)="logout()">Cerrar sesión</button></li>
+          </ul>
+        </li>
       </ul>
     </div>
   </div>

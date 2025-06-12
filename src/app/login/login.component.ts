@@ -4,12 +4,13 @@ import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { NavbarConversorComponent } from "../conversor/navbar/navbar-conversor.component";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, NavbarConversorComponent],
 })
 export class LoginComponent {
   loginForm: FormGroup;

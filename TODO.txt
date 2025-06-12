@@ -1,0 +1,7 @@
+1. hay que proteger las demas rutas de solo acceder con usuario Admin
+DONE --- 2. Hay que proteger todas las rutas de Conversor para que si se borra el token manualmente, te expulse directamente ngOnInit(): void {
+        if (!this.authService.isLoggedIn()) {
+        this.router.navigate(['/login']);
+        return; // 👈 importante: evita seguir ejecutando
+        }
+3. hay que crearen el navbar el icono User en el cual aparezca la opcion para hacer logout y la info del usuario actualmente logado
