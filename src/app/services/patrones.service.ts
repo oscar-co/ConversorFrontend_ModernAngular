@@ -19,6 +19,10 @@ export class PatronesService {
 
   getPatronById(id: number): Observable<PatronDetailResponse> {
   return this.http.get<PatronDetailResponse>(`${this.url}/${id}`);
+  }
+
+  deletePatron(id: number): Observable<any> {
+  return this.http.delete(`${this.url}/${id}`);
 }
 
 }

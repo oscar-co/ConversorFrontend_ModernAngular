@@ -4,4 +4,7 @@ DONE --- 2. Hay que proteger todas las rutas de Conversor para que si se borra e
         this.router.navigate(['/login']);
         return; // 👈 importante: evita seguir ejecutando
         }
-3. hay que crearen el navbar el icono User en el cual aparezca la opcion para hacer logout y la info del usuario actualmente logado
+DONE --- 3. hay que crearen el navbar el icono User en el cual aparezca la opcion para hacer logout y la info del usuario actualmente logado
+4. hay que manejar los usuarios en BBDD y que tengan mas propiedades como un correo, nombre, apellido, ejecutando
+5. Implementar el borrado de certificados
+6. Implementar que si se crea uno que ya existe, el anterior se pasa a la lista de historicos

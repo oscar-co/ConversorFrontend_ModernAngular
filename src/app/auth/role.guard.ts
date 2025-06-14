@@ -6,6 +6,7 @@ export const adminGuard: CanActivateFn = () => {
   const auth = inject(AuthService);
   const router = inject(Router);
 
+  console.log("Is logged In: ", auth.isLoggedIn );
   if (auth.isLoggedIn() && auth.isAdmin()) {
     return true;
   }

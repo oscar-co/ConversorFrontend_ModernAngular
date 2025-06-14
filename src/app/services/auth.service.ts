@@ -15,6 +15,7 @@ export class AuthService {
   login(username: string, password: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/auth/login`, { username, password }).pipe(
       tap((res: any) => {
+        localStorage.removeItem(this.TOKEN_KEY);
         localStorage.setItem(this.TOKEN_KEY, res.token);
       })
     );
@@ -35,10 +36,17 @@ export class AuthService {
 
     try {
       const payload = JSON.parse(atob(token.split('.')[1]));
-      return Date.now() < payload.exp * 1000;
+      const isValid = Date.now() < payload.exp * 1000;
+
+      if (!isValid) {
+      this.logout();
+      }
+
+      return isValid;
     } catch (e) {
+      this.logout();
       return false;
-    }
+  }
   }
 
   getUserRole(): string | null {

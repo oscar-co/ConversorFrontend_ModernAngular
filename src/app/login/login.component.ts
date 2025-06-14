@@ -1,6 +1,6 @@
 // src/app/components/login/login.component.ts
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -16,10 +16,16 @@ export class LoginComponent {
   loginForm: FormGroup;
   error: string | null = null;
 
-  constructor(private fb: FormBuilder, private auth: AuthService, private router: Router) {
+  constructor(private fb: FormBuilder, private auth: AuthService, private router: Router, private route: ActivatedRoute) {
     this.loginForm = this.fb.group({
       username: ['user', Validators.required],
       password: ['user123', Validators.required],
+    });
+
+    this.route.queryParams.subscribe(params => {
+      if (params['sessionExpired']) {
+        this.error = 'Tu sesión ha expirado, por favor vuelve a iniciar sesión.';
+      }
     });
   }
 
