@@ -13,6 +13,13 @@ import { AuthService } from '../../../services/auth.service';
   styleUrl: './mostrar-patrones.component.css'
 })
 export class MostrarPatronesComponent {
+  
+  
+  editarPatron(event: MouseEvent, id: number) {
+    event.stopPropagation(); // evita que dispare el routerLink
+    this.router.navigate(['/conversor-project/editar-patron', id]);
+    console.log(id);
+  }
 
   patrones: Patron[] = [];
 

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MeasurementComponent } from './measurement/measurement.component';
+import { PatronesService } from '../../../services/patrones.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-crear-patron',
@@ -13,7 +15,7 @@ import { MeasurementComponent } from './measurement/measurement.component';
 export class CrearPatronComponent {
   formCert: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private patronesService: PatronesService, private router: Router) {
     this.formCert = this.fb.group({
       certificateNumber: ['CERT-001', [Validators.required, Validators.minLength(4), Validators.maxLength(24)]],
       insType: ['Temperatura', [Validators.required, Validators.minLength(4), Validators.maxLength(24)]],
@@ -66,7 +68,23 @@ export class CrearPatronComponent {
 
   submitForm(): void {
     if (this.formCert.valid) {
-      console.log('Formulario enviado:', this.formCert.value);
+      this.patronesService.createNewPtn(this.formCert.value).subscribe({
+        next: (res) => {
+          const newId = res.data?.id;
+          console.log('Certificado creado correctamente:', res);
+          if (newId) {
+          this.router.navigate(['/conversor-project/mostrar-patron', newId]);
+        } else {
+          console.warn('No se pudo obtener el ID del nuevo patrón');
+        }
+          // Redireccionar o limpiar formulario si quieres
+        },
+        error: (err) => {
+          console.error('Error al crear el certificado:', err);
+        }
+      });
+    } else {
+      console.warn('Formulario inválido');
     }
   }
 }

@@ -8,6 +8,7 @@ import { MostrarPatronComponent } from './patrones/mostrar-patrones/mostrar-patr
 import { MostrarPatronesComponent } from './patrones/mostrar-patrones/mostrar-patrones.component';
 import { AuthGuard } from '../auth/auth.guard';
 import { adminGuard } from '../auth/role.guard';
+import { EditarPatronComponent } from './patrones/mostrar-patrones/editar-patron/editar-patron.component';
 
 
 export const CONVERSOR_ROUTES: Routes = [
@@ -19,7 +20,8 @@ export const CONVERSOR_ROUTES: Routes = [
       { path: 'conversor-unidades', component: ConversorUnidadesComponent },
       { path: 'nuevo-patron', component: CrearPatronComponent, canActivate: [adminGuard]},
       { path: 'mostrar-todos-patrones', component: MostrarPatronesComponent},
-      { path: 'mostrar-patron/:id', component: MostrarPatronComponent}
+      { path: 'mostrar-patron/:id', component: MostrarPatronComponent},
+      { path: 'editar-patron/:id', component: EditarPatronComponent, canActivate: [adminGuard]}
     ]
   }
 ];
