@@ -1,72 +1,144 @@
+:host {
+  display: block;
+  background-color: #121212; /* Igual que home */
+  color: #ffffff;
+}
+
 .section-title {
-    position: relative;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-  
-  .section-title::after {
-    content: "";
-    display: block;
-    width: 80px;
-    height: 4px;
-    background: linear-gradient(to right, #4cad80, #1c4834);
-    margin: 16px auto 0;
-    border-radius: 2px;
-  }
-  
-  .avatar-wrapper {
-    padding: 10px;
-    display: flex;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .avatar {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 3px solid transparent;
-    background-image: linear-gradient(white, white), linear-gradient(45deg, #4cad80, #00ffff);
-    background-origin: border-box;
-    background-clip: content-box, border-box;
-  }
+  position: relative;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
 
-  .tech-card {
-    height: 130px;     /* Antes 110 o 140 */
-    width: 130px;
-    padding: 10px;
-  }
+.section-title::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(to right, #4cad80, #1c4834);
+  margin: 16px auto 0;
+  border-radius: 2px;
+}
 
-  .tech-card img {
-    width: 70px;       /* Entre 48px y 64px */
-    height: 70px;
-    object-fit: contain;
-    pointer-events: none;
-  }
+.avatar-wrapper {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  .tech-card p {
-    font-size: 0.8rem;  /* Antes: 0.9rem */
-    margin: 4px 0 0;
+.avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid transparent;
+  background-image: linear-gradient(white, white), linear-gradient(45deg, #4cad80, #00ffff);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.about-section {
+  background-color: #121212; /* Sustituye el anterior bg-dark */
+  font-family: 'Segoe UI', sans-serif;
+  color: #ffffff;
+}
+
+
+.about-intro {
+  font-size: 1.2rem;
+  line-height: 1.7;
+  color: #dddddd;
+  text-align: justify;
+}
+
+.tech-card {
+  height: 130px;
+  width: 130px;
+  padding: 10px;
+}
+
+.tech-card img {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.tech-card p {
+  font-size: 0.8rem;
+  margin: 4px 0 0;
+}
+
+/* --- Botón CV --- */
+.btn-cv {
+  padding: 12px 24px;
+  font-weight: 500;
+  font-size: 1rem;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+  border: 2px solid #4cad80;
+  color: #4cad80;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-cv:hover {
+  background-color: #4cad80;
+  color: #121212;
+  transform: translateY(-2px);
+  box-shadow: 0 0 10px #4cad80;
+}
+
+.btn-cv i {
+  animation: bounceIcon 1.5s infinite;
+}
+
+@keyframes bounceIcon {
+  0%, 100% {
+    transform: translateY(0);
   }
-  
-  .avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
+  50% {
+    transform: translateY(-4px);
   }
-  
-  .about-section {
-    font-family: 'Segoe UI' sans-serif;
-  }
-  
-  .about-intro {
-    font-size: 1.2rem;
-    line-height: 1.7;
-    color: #dcdcdc;
-    text-align: justify;
-  }
-  
+}
+
+.tech-card {
+  height: 130px;
+  width: 130px;
+  padding: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.tech-card:hover {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 255, 180, 0.4);
+  background-color: #2a2a2a;
+}
+
+.tech-card img {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  pointer-events: none;
+  transition: transform 0.3s ease;
+}
+
+.tech-card:hover img {
+  transform: scale(1.1);
+}

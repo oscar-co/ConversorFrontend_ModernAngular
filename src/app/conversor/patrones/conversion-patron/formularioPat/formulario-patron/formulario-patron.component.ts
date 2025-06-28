@@ -92,7 +92,8 @@ export class FormularioPatronComponent {
 
   calcularInc(): void {
     const patron = this.formaPat.get('patron')?.value;
-  
+          console.log("Forma pat", this.formaPat);
+
     if (patron !== null && patron !== undefined && patron !== '') {
       this.conversorService.getIncertidumbrePorPatronYValor(this.formaPat).subscribe((valor: number) => {
         this.incertidumbrePatron = valor;
