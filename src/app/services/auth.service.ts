@@ -21,6 +21,10 @@ export class AuthService {
     );
   }
 
+  register(data: { username: string; password: string; email: string; }): Observable<any> {
+    return this.http.post(`${this.apiUrl}/users/register`, data);
+  }
+
   logout(): void {
     localStorage.removeItem(this.TOKEN_KEY);
   }
@@ -66,10 +70,10 @@ export class AuthService {
   try {
     const payload = JSON.parse(atob(token.split('.')[1]));
     return payload.sub || null;
-  } catch (e) {
-    return null;
+    } catch (e) {
+      return null;
+    }
   }
-}
 
   isAdmin(): boolean {
     return this.getUserRole() === 'ROLE_ADMIN';
