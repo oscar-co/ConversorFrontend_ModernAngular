@@ -3,6 +3,7 @@ import { PortfolioComponent } from './portfolio/portfolio.component';
 import { LoginComponent } from './login/login.component';
 import { AccessDeniedComponent } from './pages/access-denied/access-denied.component';
 import { AuthGuard } from './auth/auth.guard';
+import { RegisterComponent } from './login/register/register.component';
 
 
 export const routes: Routes = [
@@ -10,6 +11,7 @@ export const routes: Routes = [
   { path: 'portfolio', component: PortfolioComponent },
   { path: 'login', component: LoginComponent },
   { path: 'access-denied', component: AccessDeniedComponent },
+  { path: 'register', component: RegisterComponent },
   {
     path: 'conversor-project',
     canActivate: [AuthGuard],

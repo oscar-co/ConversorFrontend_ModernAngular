@@ -1,6 +1,6 @@
 // src/app/components/login/login.component.ts
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -10,7 +10,7 @@ import { NavbarConversorComponent } from "../conversor/navbar/navbar-conversor.c
   selector: 'app-login',
   templateUrl: './login.component.html',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, NavbarConversorComponent],
+  imports: [CommonModule, ReactiveFormsModule, NavbarConversorComponent, RouterModule],
 })
 export class LoginComponent {
   loginForm: FormGroup;
