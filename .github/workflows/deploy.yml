@@ -1,0 +1,26 @@
+name: Deploy Frontend to VPS
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - prod
+
+jobs:
+  deploy:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Deploy to VPS
+        run: |
+          ssh -o StrictHostKeyChecking=no root@31.97.77.157 "bash /opt/deploy-scripts/deploy-frontend.sh"
