@@ -42,6 +42,7 @@ export class EditarPatronComponent {
 
   buildForm(patron: Patron): void {
     this.patronForm = this.fb.group({
+      id: [],
       certificateNumber: [patron.certificateNumber, Validators.required],
       insType: [patron.insType, Validators.required],
       brand: [patron.brand],
