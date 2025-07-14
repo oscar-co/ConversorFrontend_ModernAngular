@@ -56,6 +56,7 @@ export class EditarPatronComponent {
 
   createMeasurementGroup(m: any = {}): FormGroup {
     return this.fb.group({
+      id: [m.id || null],
       reference: [m.reference || '', Validators.required],
       instrumentReading: [m.instrumentReading || '', Validators.required],
       correction: [m.correction || '', Validators.required],
