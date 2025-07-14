@@ -55,6 +55,7 @@
         <div formArrayName="measurements">
           <div *ngFor="let m of measurements.controls; let i = index" [formGroupName]="i" class="border rounded p-3 mb-3">
             <div class="row">
+              <input type="hidden" formControlName="id">
               <div class="col-md-2">
                 <label class="form-label">Referencia</label>
                 <input class="form-control" formControlName="reference">
