@@ -35,6 +35,7 @@
           },
           "configurations": {       
               "production": {
+                "baseHref": "/certificator/app/",
                 "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
