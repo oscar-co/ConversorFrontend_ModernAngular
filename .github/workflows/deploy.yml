@@ -1,20 +1,23 @@
 name: Deploy Frontend to VPS
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
     branches: [ main ]
-    
+    types: [ closed ]   # Solo cuando el PR se cierra (merge o closed sin merge)
+  workflow_dispatch: {} # Permite lanzarlo manualmente si quieres
+
+concurrency:
+  group: deploy-frontend
+  cancel-in-progress: true
 
 jobs:
   deploy:
-    if: github.event.pull_request.merged == true
+    if: ${{ github.event.pull_request.merged == true }} # Ejecuta solo si fue MERGE real
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+      - name: Show event info (debug)
+        run: echo "event=${{ github.event_name }} action=${{ github.event.action }} merged=${{ github.event.pull_request.merged }}"
 
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.8.0
@@ -22,5 +25,4 @@ jobs:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Deploy to VPS
-        run: |
-          ssh -o StrictHostKeyChecking=no root@31.97.77.157 "bash /opt/deploy-scripts/deploy-frontend.sh"
+        run: ssh -o StrictHostKeyChecking=no root@31.97.77.157 "bash /opt/deploy-scripts/deploy-frontend.sh"
