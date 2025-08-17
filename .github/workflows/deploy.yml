@@ -1,11 +1,10 @@
 name: Deploy Frontend to VPS
 
 on:
+  push:
+    branches: [ main ]
   pull_request:
-    types:
-      - closed
-    branches:
-      - prod
+    branches: [ main ]
 
 jobs:
   deploy:
