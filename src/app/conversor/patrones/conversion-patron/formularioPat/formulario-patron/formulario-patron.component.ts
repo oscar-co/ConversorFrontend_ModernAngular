@@ -48,7 +48,8 @@ export class FormularioPatronComponent {
       magnitud: value,
       inputUnit: '',
       outputUnit: '',
-      inputValue: ''
+      inputValue: '',
+      patron: ''
     });
     this.limpiarValoresSalida();
   
@@ -123,7 +124,15 @@ export class FormularioPatronComponent {
   }
 
   resetForm() {
-    this.formaPat.reset();
+
+    this.formaPat.reset({
+      magnitud: '',
+      inputUnit: '',
+      outputUnit: '',
+      inputValue: '',
+      patron: ''
+    });
+
     //this.showResult = false;
     this.uniSalida = '';
     this.limpiarValoresSalida();

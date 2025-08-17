@@ -1,85 +1,78 @@
-<form [formGroup]="formaPat" class="p-4 shadow rounded bg-white" style="max-width: 500px; margin: auto;">
+<form [formGroup]="formaPat" class="p-4 shadow rounded bg-white" style="max-width: 500px; margin: auto;"
+      data-comp="formulario-patron" data-testid="pattern-converter.form" novalidate>
 
   <!-- Cabecera -->
-  <div class="bg-dark text-white text-center p-3 rounded shadow mb-5">
-    <h3 class="mb-0">
-      <i class="fas fa-stream me-2"></i> Conversor con Patrón
-    </h3>
+  <div class="bg-dark text-white text-center p-3 rounded shadow mb-5" data-testid="header">
+    <h3 class="mb-0"><i class="fas fa-stream me-2"></i> Conversor con Patrón</h3>
   </div>
 
   <!-- Magnitud -->
-  <div class="mb-3">
+  <div class="mb-3" data-testid="field.magnitude">
     <label for="magnitud" class="form-label">Magnitud</label>
-    <select id="magnitud" formControlName="magnitud" class="form-select" (change)="magnitudChange($event)">
+    <select id="magnitud" formControlName="magnitud" class="form-select" (change)="magnitudChange($event)" data-testid="select.magnitude">
       <option value="" disabled selected>Seleccione una magnitud</option>
-      <option value="temperatura">Temperatura</option>
-      <option value="presion">Presión</option>
-      <option value="masa">Masa</option>
-      <option value="longitud">Longitud</option>
-      <option value="area">Área</option>
+      <option value="temperatura">Temperatura</option><option value="presion">Presión</option>
+      <option value="masa">Masa</option><option value="longitud">Longitud</option><option value="area">Área</option>
     </select>
   </div>
 
   <!-- Unidad de entrada -->
-  <div class="mb-3">
+  <div class="mb-3" data-testid="field.input-unit">
     <label for="inputUnit" class="form-label">Unidad de Entrada</label>
-    <select id="inputUnit" formControlName="inputUnit" class="form-select" (change)="convertir()">
+    <select id="inputUnit" formControlName="inputUnit" class="form-select" (change)="convertir()" data-testid="select.input-unit">
       <option value="" disabled selected>Seleccione unidad</option>
       <option *ngFor="let unidad of unidades" [value]="unidad">{{ unidad }}</option>
     </select>
   </div>
 
   <!-- Valor de entrada -->
-  <div class="mb-3">
+  <div class="mb-3" data-testid="field.input-value">
     <label for="inputValue" class="form-label">Valor de Entrada</label>
-    <input id="inputValue" type="number" formControlName="inputValue" class="form-control" placeholder="Introduzca V. Entrada" (keyup)="convertir()">
+    <input id="inputValue" type="number" formControlName="inputValue" class="form-control"
+           placeholder="Introduzca V. Entrada" (keyup)="convertir()" inputmode="decimal" data-testid="input.value" />
   </div>
 
   <!-- Patrón -->
-  <div class="mb-3">
+  <div class="mb-3" data-testid="field.pattern">
     <label for="patron" class="form-label">Patrón</label>
-    <select id="patron" formControlName="patron" class="form-select" (change)="calcularInc()">
+    <select id="patron" formControlName="patron" class="form-select" (change)="calcularInc()" data-testid="select.pattern">
       <option value="" disabled selected>Seleccione patrón</option>
       <option *ngFor="let patron of patrones" [value]="patron">{{ patron }}</option>
     </select>
   </div>
 
   <!-- Resultado -->
-  <div class="row my-1">
+  <div class="row my-1" data-testid="section.result">
     <div class="col-12">
-      <div class="position-relative alert alert-success p-3">
-        <button type="button"
-                class="btn btn-sm btn-light position-absolute top-0 end-0 m-2"
-                (click)="copiarResultado()"
-                title="Copiar al portapapeles"
-                [disabled]="!showResult">
+      <div class="position-relative alert alert-success p-3" role="status" aria-live="polite" data-testid="result.container">
+        <button type="button" class="btn btn-sm btn-light position-absolute top-0 end-0 m-2"
+                (click)="copiarResultado()" [disabled]="!showResult" title="Copiar al portapapeles"
+                data-testid="btn.copy-result">
           <i class="fas fa-copy"></i>
         </button>
-        <h5 class="mb-2">Resultado</h5>
-        <p class="mb-0" *ngIf="showResult">
-          La Incertidmbre del patrón es
-          <b>{{ incertidumbrePatron }}</b> {{ uniSalida }}
+        <h5 class="mb-2" data-testid="result.title">Resultado</h5>
+        <p class="mb-0" *ngIf="showResult" data-testid="result.text">
+          La Incertidumbre del patrón es: <b data-testid="result.value">{{ incertidumbrePatron }}</b>
+          <span data-testid="result.unit"> {{ uniSalida }}</span>
         </p>
-        <p class="mb-0 text-muted fst-italic" *ngIf="!showResult && !errorMessage">
-          Aquí se mostrará el resultado de la Incertidmbre.
+        <p class="mb-0 text-muted fst-italic" *ngIf="!showResult && !errorMessage" data-testid="result.placeholder">
+          Aquí se mostrará el resultado de la Incertidumbre.
         </p>
-        <p *ngIf="errorMessage" class="mb-0 text-danger">{{ errorMessage }}</p>
-        <div class="d-grid gap-2 mt-3">
-          <button type="button" (click)="resetForm()" class="btn btn-outline-dark">Borrar</button>
+        <p *ngIf="errorMessage" class="mb-0 text-danger" data-testid="result.error">{{ errorMessage }}</p>
+        <div class="d-grid gap-2 mt-3" data-testid="actions">
+          <button type="button" (click)="resetForm()" class="btn btn-outline-dark" data-testid="btn.clear">Borrar</button>
         </div>
       </div>
     </div>
   </div>
-
 </form>
 
 <!-- Toast -->
-<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1055">
-  <div id="copyToast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1055" data-comp="toast-area">
+  <div id="copyToast" class="toast align-items-center text-bg-success border-0"
+       role="alert" aria-live="assertive" aria-atomic="true" data-testid="toast.copy-success">
     <div class="d-flex">
-      <div class="toast-body">
-        Resultado copiado al portapapeles.
-      </div>
+      <div class="toast-body" data-testid="toast.copy-success.body">Resultado copiado al portapapeles.</div>
     </div>
   </div>
 </div>

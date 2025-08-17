@@ -1,52 +1,60 @@
-<div class="container mt-5 pt-5" *ngIf="patron; else cargando">
-  <div class="card shadow">
-    <div class="card-header bg-dark text-white">
-      <h4 class="mb-0">Certificado de Calibración - {{ patron.certificateNumber }}</h4>
+<div class="container mt-5 pt-5" *ngIf="patron; else cargando"
+     data-comp="mostrar-patron" data-testid="patron.detail.container">
+  <div class="card shadow" data-testid="patron.card">
+    <div class="card-header bg-dark text-white" data-testid="patron.card.header">
+      <h4 class="mb-0" data-testid="patron.title">
+        Certificado de Calibración - {{ patron.certificateNumber }}
+      </h4>
     </div>
-    <div class="card-body">
-      <p><strong>Tipo de instrumento:</strong> {{ patron.insType }}</p>
-      <p><strong>Marca:</strong> {{ patron.brand }}</p>
-      <p><strong>Modelo:</strong> {{ patron.model }}</p>
-      <p><strong>Identificación:</strong> {{ patron.nameIdentify }}</p>
-      <p><strong>Descripción:</strong> {{ patron.description }}</p>
-      <p><strong>Unidad de medida:</strong> {{ patron.unit }}</p>
-      <p><strong>Fecha de emisión:</strong> {{ patron.issueDate | date:'yyyy-MM-dd' }}</p>
+    <div class="card-body" data-testid="patron.card.body">
+
+      <p data-testid="patron.type"><strong>Tipo de instrumento:</strong> {{ patron.insType }}</p>
+      <p data-testid="patron.brand"><strong>Marca:</strong> {{ patron.brand }}</p>
+      <p data-testid="patron.model"><strong>Modelo:</strong> {{ patron.model }}</p>
+      <p data-testid="patron.identifier"><strong>Identificación:</strong> {{ patron.nameIdentify }}</p>
+      <p data-testid="patron.description"><strong>Descripción:</strong> {{ patron.description }}</p>
+      <p data-testid="patron.unit"><strong>Unidad de medida:</strong> {{ patron.unit }}</p>
+      <p data-testid="patron.issueDate"><strong>Fecha de emisión:</strong> {{ patron.issueDate | date:'yyyy-MM-dd' }}</p>
 
       <hr />
 
-      <h5 class="mt-4">Resultados de Medición</h5>
-      <div class="table-responsive">
-        <table class="table table-bordered table-striped text-center align-middle">
-          <thead class="table-dark">
+      <h5 class="mt-4" data-testid="patron.measurements.title">Resultados de Medición</h5>
+      <div class="table-responsive" data-testid="patron.measurements.wrap">
+        <table class="table table-bordered table-striped text-center align-middle"
+               data-testid="patron.measurements.table">
+          <thead class="table-dark" data-testid="patron.measurements.thead">
             <tr>
-              <th>Referencia</th>
-              <th>Lectura instrumento</th>
-              <th>Corrección</th>
-              <th>Incertidumbre</th>
-              <th>Temp. ambiente (°C)</th>
+              <th data-testid="colh.reference">Referencia</th>
+              <th data-testid="colh.instrumentReading">Lectura instrumento</th>
+              <th data-testid="colh.correction">Corrección</th>
+              <th data-testid="colh.uncertainty">Incertidumbre</th>
+              <th data-testid="colh.ambientTemp">Temp. ambiente (°C)</th>
             </tr>
           </thead>
-          <tbody>
-            <tr *ngFor="let m of patron.measurements">
-              <td>{{ m.reference }}</td>
-              <td>{{ m.instrumentReading }}</td>
-              <td>{{ m.correction }}</td>
-              <td>{{ m.uncertainty }}</td>
-              <td>{{ m.ambientTemp }}</td>
+          <tbody data-testid="patron.measurements.tbody">
+            <tr *ngFor="let m of patron.measurements" data-testid="measurement.row">
+              <td data-testid="measurement.reference">{{ m.reference }}</td>
+              <td data-testid="measurement.instrumentReading">{{ m.instrumentReading }}</td>
+              <td data-testid="measurement.correction">{{ m.correction }}</td>
+              <td data-testid="measurement.uncertainty">{{ m.uncertainty }}</td>
+              <td data-testid="measurement.ambientTemp">{{ m.ambientTemp }}</td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <a routerLink="/conversor-project/mostrar-todos-patrones" class="btn btn-secondary mt-3">
+      <a routerLink="/conversor-project/mostrar-todos-patrones"
+         class="btn btn-secondary mt-3"
+         data-testid="btn.back-to-list">
         ← Volver a la lista
       </a>
     </div>
   </div>
 </div>
+
 <ng-template #cargando>
-  <div class="text-center mt-5 pt-5">
-    <div class="spinner-border" role="status"></div>
-    <p class="mt-3">Cargando certificado...</p>
+  <div class="text-center mt-5 pt-5" data-testid="patron.loading">
+    <div class="spinner-border" role="status" data-testid="loading.spinner"></div>
+    <p class="mt-3" data-testid="loading.text">Cargando certificado...</p>
   </div>
 </ng-template>
