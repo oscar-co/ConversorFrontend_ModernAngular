@@ -1,65 +1,76 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow pb-4 fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow pb-4 fixed-top"
+     data-comp="navbar" data-testid="navbar.global">
   <div class="container-fluid">
-    <a class="navbar-brand px-2" [routerLink]="['/conversor-project']">
+    <!-- Logo / brand -->
+    <a class="navbar-brand px-2" [routerLink]="['/conversor-project']" data-testid="navbar.brand">
       <i class="fas fa-ruler-combined me-2"></i> ConversorApp
     </a>
+
+    <!-- Botón toggler (mobile) -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"
+      data-testid="navbar.toggler">
       <span class="navbar-toggler-icon"></span>
     </button>
 
+    <!-- Links -->
     <div class="collapse navbar-collapse" id="navbarNav" #navbarCollapse>
       <ul class="navbar-nav ms-auto">
+
         <li class="nav-item mx-2">
-          <a class="nav-link" [routerLink]="['/']" (click)="navbarCollapse.classList.remove('show')">Portfolio</a>
+          <a class="nav-link" [routerLink]="['/']" (click)="navbarCollapse.classList.remove('show')" data-testid="navbar.link.portfolio">Portfolio</a>
         </li>
+
         <li class="nav-item mx-2">
-          <a class="nav-link" [routerLink]="['/conversor-project']" (click)="navbarCollapse.classList.remove('show')">Inicio</a>
+          <a class="nav-link" [routerLink]="['/conversor-project']" (click)="navbarCollapse.classList.remove('show')" data-testid="navbar.link.home">Inicio</a>
         </li>
+
         <li class="nav-item mx-2">
           <a class="nav-link" [routerLink]="['/conversor-project/conversor-unidades']"
-            (click)="navbarCollapse.classList.remove('show')">Conversor Unidades</a>
+             (click)="navbarCollapse.classList.remove('show')" data-testid="navbar.link.conversor-unidades">
+            Conversor Unidades
+          </a>
         </li>
-        <li class="nav-item dropdown mx-2">
-          <a class="nav-link dropdown-toggle" href="#" id="conversorPatronesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+        <!-- Dropdown patrones -->
+        <li class="nav-item dropdown mx-2" data-testid="navbar.dropdown.patrones">
+          <a class="nav-link dropdown-toggle" href="#" id="conversorPatronesDropdown" role="button"
+             data-bs-toggle="dropdown" aria-expanded="false" data-testid="navbar.link.patrones">
             Conversor Patrones
           </a>
           <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="conversorPatronesDropdown">
-            <li>
-              <a class="dropdown-item" [routerLink]="['mostrar-todos-patrones']" (click)="navbarCollapse.classList.remove('show')">
-                Mostrar todos los Certificados
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item" [routerLink]="['/conversor-project/conversor-patrones']" (click)="navbarCollapse.classList.remove('show')">
-                Obtener Incertidumbre
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item" *ngIf="isAdmin" [routerLink]="['/conversor-project/nuevo-patron']" (click)="navbarCollapse.classList.remove('show')">
-                Añadir certificado
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item" *ngIf="isAdmin" [routerLink]="['/conversor-project/update']" (click)="navbarCollapse.classList.remove('show')">
-                Actualizar certificado
-              </a>
-            </li>
+            <li><a class="dropdown-item" [routerLink]="['mostrar-todos-patrones']"
+                   (click)="navbarCollapse.classList.remove('show')" data-testid="navbar.patrones.todos">
+                   Mostrar todos los Certificados
+                </a></li>
+            <li><a class="dropdown-item" [routerLink]="['/conversor-project/conversor-patrones']"
+                   (click)="navbarCollapse.classList.remove('show')" data-testid="navbar.patrones.incertidumbre">
+                   Obtener Incertidumbre
+                </a></li>
+            <li *ngIf="isAdmin"><a class="dropdown-item" [routerLink]="['/conversor-project/nuevo-patron']"
+                   (click)="navbarCollapse.classList.remove('show')" data-testid="navbar.patrones.nuevo">
+                   Añadir certificado
+                </a></li>
+            <li *ngIf="isAdmin"><a class="dropdown-item" [routerLink]="['/conversor-project/update']"
+                   (click)="navbarCollapse.classList.remove('show')" data-testid="navbar.patrones.update">
+                   Actualizar certificado
+                </a></li>
           </ul>
         </li>
 
-        <!-- Icono usuario -->
-        <li class="nav-item dropdown mx-2" *ngIf="isLoggedIn">
+        <!-- Usuario -->
+        <li class="nav-item dropdown mx-2" *ngIf="isLoggedIn" data-testid="navbar.dropdown.user">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-             aria-expanded="false">
+             aria-expanded="false" data-testid="navbar.link.user">
             <i class="fas fa-user-circle me-1"></i> {{ username }}
           </a>
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
-            <li><span class="dropdown-item-text">Rol: {{ userRole }}</span></li>
+            <li><span class="dropdown-item-text" data-testid="navbar.user.role">Rol: {{ userRole }}</span></li>
             <li><hr class="dropdown-divider" /></li>
-            <li><button class="dropdown-item" (click)="logout()">Cerrar sesión</button></li>
+            <li><button class="dropdown-item" (click)="logout()" data-testid="navbar.user.logout">Cerrar sesión</button></li>
           </ul>
         </li>
+
       </ul>
     </div>
   </div>

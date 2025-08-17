@@ -1,17 +1,21 @@
-<footer class="bg-dark text-white text-center py-4 mt-1 shadow">
-  <div class="container">
-    <div class="mb-3">
-      <a href="https://www.linkedin.com/in/oscarcarrero/" target="_blank" class="text-white mx-2">
+<footer class="bg-dark text-white text-center py-4 mt-1 shadow"
+        data-comp="project-footer" data-testid="footer.container">
+  <div class="container" data-testid="footer.content">
+    <div class="mb-3" data-testid="footer.social">
+      <a href="https://www.linkedin.com/in/oscarcarrero/"
+         target="_blank" class="text-white mx-2" data-testid="footer.link.linkedin">
         <i class="fab fa-linkedin fa-lg"></i>
       </a>
-      <a href="https://github.com/oscar-co" target="_blank" class="text-white mx-2">
+      <a href="https://github.com/oscar-co"
+         target="_blank" class="text-white mx-2" data-testid="footer.link.github">
         <i class="fab fa-github fa-lg"></i>
       </a>
-      <a href="https://www.instagram.com/tuusuario" target="_blank" class="text-white mx-2">
+      <a href="https://www.instagram.com/tuusuario"
+         target="_blank" class="text-white mx-2" data-testid="footer.link.instagram">
         <i class="fab fa-instagram fa-lg"></i>
       </a>
     </div>
-    <div>
+    <div data-testid="footer.copy">
       <small>&copy; {{ currentYear }} Óscar Carrero. All rights reserved.</small>
     </div>
   </div>

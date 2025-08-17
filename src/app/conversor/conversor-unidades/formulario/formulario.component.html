@@ -1,86 +1,74 @@
-<form [formGroup]="forma" class="p-4 shadow rounded bg-white" style="max-width: 500px; margin: auto;">
+<form [formGroup]="forma" class="p-4 shadow rounded bg-white" style="max-width: 500px; margin: auto;"
+      data-comp="formulario" data-testid="converter.form" novalidate>
 
-  <!-- CABECERA en gris oscuro -->
-  <div class="bg-dark text-white text-center p-3 rounded shadow mb-4">
-    <h1 class="mb-0">
-      <i class="fas fa-ruler-combined me-2"></i> Conversor de Unidades
-    </h1>
+  <!-- CABECERA -->
+  <div class="bg-dark text-white text-center p-3 rounded shadow mb-4" data-testid="header">
+    <h1 class="mb-0"><i class="fas fa-ruler-combined me-2"></i> Conversor de Unidades</h1>
   </div>
 
-  <!-- Selección de magnitud -->
-  <div class="mb-3">
+  <!-- Magnitud -->
+  <div class="mb-3" data-testid="field.magnitude">
     <label for="magnitud" class="form-label">Magnitud</label>
-    <select formControlName="magnitud" id="magnitud" class="form-select" (change)="magnitudChange($event)">
+    <select formControlName="magnitud" id="magnitud" class="form-select" (change)="magnitudChange($event)" data-testid="select.magnitude">
       <option value="">Selecciona una magnitud</option>
-      <option value="temperatura">Temperatura</option>
-      <option value="presion">Presión</option>
-      <option value="masa">Masa</option>
-      <option value="longitud">Longitud</option>
-      <option value="area">Área</option>
+      <option value="temperatura">Temperatura</option><option value="presion">Presión</option>
+      <option value="masa">Masa</option><option value="longitud">Longitud</option><option value="area">Área</option>
     </select>
   </div>
 
-  <!-- Unidad de entrada -->
-  <div class="mb-3">
-    <label class="form-label">Unidad de Entrada</label>
-    <select formControlName="inputUnit" class="form-select" (change)="convertir()">
+  <!-- Unidad entrada -->
+  <div class="mb-3" data-testid="field.input-unit">
+    <label for="inputUnit" class="form-label">Unidad de Entrada</label>
+    <select formControlName="inputUnit" id="inputUnit" class="form-select" (change)="convertir()" data-testid="select.input-unit">
       <option *ngFor="let unidad of unidades" [value]="unidad">{{ unidad }}</option>
     </select>
   </div>
 
-  <!-- Unidad de salida -->
-  <div class="mb-3">
-    <label class="form-label">Unidad de Salida</label>
-    <select formControlName="outputUnit" class="form-select" (change)="convertir()">
+  <!-- Unidad salida -->
+  <div class="mb-3" data-testid="field.output-unit">
+    <label for="outputUnit" class="form-label">Unidad de Salida</label>
+    <select formControlName="outputUnit" id="outputUnit" class="form-select" (change)="convertir()" data-testid="select.output-unit">
       <option *ngFor="let unidad of unidades" [value]="unidad">{{ unidad }}</option>
     </select>
   </div>
 
-  <!-- Valor a convertir -->
-  <div class="mb-3">
-    <label class="form-label">Valor de Entrada</label>
-    <input type="number" class="form-control" formControlName="inputValue" (keyup)="convertir()">
+  <!-- Valor entrada -->
+  <div class="mb-3" data-testid="field.input-value">
+    <label for="inputValue" class="form-label">Valor de Entrada</label>
+    <input type="number" class="form-control" id="inputValue" formControlName="inputValue" (keyup)="convertir()" inputmode="decimal" 
+        data-testid="input.value" />
   </div>
 
   <!-- Resultado -->
-  <div class="row my-1">
+  <div class="row my-1" data-testid="section.result">
     <div class="col-12">
-      <div class="position-relative alert alert-success p-3">
-        <button type="button"
-                class="btn btn-sm btn-light position-absolute top-0 end-0 m-2"
-                (click)="copiarResultado()"
-                title="Copiar al portapapeles"
-                [disabled]="!showResult">
+      <div class="position-relative alert alert-success p-3" role="status" aria-live="polite" data-testid="result.container">
+        <button type="button" class="btn btn-sm btn-light position-absolute top-0 end-0 m-2" (click)="copiarResultado()" 
+            [disabled]="!showResult" data-testid="btn.copy-result">
           <i class="fas fa-copy"></i>
         </button>
-  
-        <h5 class="mb-2">Resultado</h5>
-        <p class="mb-0" *ngIf="showResult">
-          El resultado de la conversión es
-          <b>{{ resultFormatted }}</b> {{ forma.get('outputUnit')?.value }}
+        <h5 class="mb-2" data-testid="result.title">Resultado</h5>
+        <p class="mb-0" *ngIf="showResult" data-testid="result.text">
+          El resultado es <b data-testid="result.value">{{ resultFormatted }}</b>
+          <span data-testid="result.unit">{{ forma.get('outputUnit')?.value }}</span>
         </p>
-        <p class="mb-0 text-muted fst-italic" *ngIf="!showResult">
-          Aquí se mostrará el resultado de la conversión.
+        <p class="mb-0 text-muted fst-italic" *ngIf="!showResult" data-testid="result.placeholder">
+          Aquí se mostrará el resultado.
         </p>
       </div>
     </div>
   </div>
 
-  <!-- Botón limpiar con estilo gris oscuro -->
-  <div class="d-grid gap-2">
-    <button type="button" (click)="resetForm()" class="btn btn-outline-dark">
-      Limpiar
-    </button>
+  <!-- Botón limpiar -->
+  <div class="d-grid gap-2" data-testid="actions">
+    <button type="button" (click)="resetForm()" class="btn btn-outline-dark" data-testid="btn.clear">Limpiar</button>
   </div>
 </form>
 
 <!-- Toast -->
-<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1055">
-  <div id="copyToast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="d-flex">
-      <div class="toast-body">
-        Resultado copiado al portapapeles.
-      </div>
-    </div>
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1055" data-comp="toast-area">
+  <div id="copyToast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" 
+      aria-atomic="true" data-testid="toast.copy-success">
+    <div class="d-flex"><div class="toast-body" data-testid="toast.copy-success.body">Resultado copiado al portapapeles.</div></div>
   </div>
 </div>
