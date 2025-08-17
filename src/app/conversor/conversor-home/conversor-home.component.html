@@ -1,5 +1,5 @@
 <!-- Envoltura que asegura altura completa -->
-<div class="d-flex justify-content-center align-items-center" style="min-height: calc(100vh - 160px);">
+<div class="d-flex justify-content-center align-items-center" data-page="conversores-project" style="min-height: calc(100vh - 160px);">
   <div class="row justify-content-center text-center text-dark w-100">
     <div class="col-md-8 col-lg-6">
 
@@ -8,7 +8,8 @@
         <!-- Botón Conversor -->
         <div class="col-10 col-md-6 col-lg-5 mb-4">
           <a [routerLink]="['/conversor-project/conversor-unidades']"
-             class="btn btn-outline-dark shadow w-100 py-3 rounded">
+             class="btn btn-outline-dark shadow w-100 py-3 rounded"
+             data-testid="home.conversion.link">
             <i class="fas fa-balance-scale me-2"></i> Acceder al Conversor
           </a>
         </div>
@@ -16,7 +17,8 @@
         <!-- Botón Patrones -->
         <div class="col-10 col-md-6 col-lg-5 mb-4">
           <a [routerLink]="['/conversor-project/conversor-patrones']"
-             class="btn btn-outline-dark shadow w-100 py-3 rounded">
+             class="btn btn-outline-dark shadow w-100 py-3 rounded"
+             data-testid="home.patrones.link">
             <i class="fas fa-stream me-2"></i> Patrones de Conversión
           </a>
         </div>

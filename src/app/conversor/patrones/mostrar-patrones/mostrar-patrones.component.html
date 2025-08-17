@@ -1,42 +1,45 @@
-<div class="container mt-5 pt-5">
-  <div class="card shadow">
-    <div class="card-header bg-dark text-white">
-      <h4 class="mb-0">Listado de Certificados (Patrones)</h4>
+<div class="container mt-5 pt-5" data-comp="listar-patrones" data-testid="patrones.list.container">
+  <div class="card shadow" data-testid="patrones.card">
+    <div class="card-header bg-dark text-white" data-testid="patrones.card.header">
+      <h4 class="mb-0" data-testid="patrones.title">Listado de Certificados (Patrones)</h4>
     </div>
-    <div class="card-body">
-      <div class="table-responsive">
-        <table class="table table-bordered table-hover align-middle text-center">
-          <thead class="table-dark">
+    <div class="card-body" data-testid="patrones.card.body">
+      <div class="table-responsive" data-testid="patrones.table.wrap">
+        <table class="table table-bordered table-hover align-middle text-center" data-testid="patrones.table">
+          <thead class="table-dark" data-testid="patrones.thead">
             <tr>
-              <th>#</th>
-              <th>Número</th>
-              <th>Instrumento</th>
-              <th>Marca</th>
-              <th>Modelo</th>
-              <th>Emitido</th>
-              <th *ngIf="isAdmin">Editar</th>
-              <th *ngIf="isAdmin">Eliminar</th>
+              <th data-testid="colh.index">#</th>
+              <th data-testid="colh.number">Número</th>
+              <th data-testid="colh.instrument">Instrumento</th>
+              <th data-testid="colh.brand">Marca</th>
+              <th data-testid="colh.model">Modelo</th>
+              <th data-testid="colh.issueDate">Emitido</th>
+              <th *ngIf="isAdmin" data-testid="colh.edit">Editar</th>
+              <th *ngIf="isAdmin" data-testid="colh.delete">Eliminar</th>
             </tr>
           </thead>
-          <tbody>
-             <tr *ngFor="let patron of patrones; let i = index"
+          <tbody data-testid="patrones.tbody">
+            <tr *ngFor="let patron of patrones; let i = index"
                 class="table-row-clickable"
-                [routerLink]="['/conversor-project/mostrar-patron', patron.id]">
-              <td>{{ i + 1 }}</td>
-              <td>{{ patron.certificateNumber }}</td>
-              <td>{{ patron.insType }}</td>
-              <td>{{ patron.brand }}</td>
-              <td>{{ patron.model }}</td>
-              <td>{{ patron.issueDate }}</td>
+                [routerLink]="['/conversor-project/mostrar-patron', patron.id]"
+                data-testid="patrones.row">
+              <td data-testid="col.index">{{ i + 1 }}</td>
+              <td data-testid="col.number">{{ patron.certificateNumber }}</td>
+              <td data-testid="col.instrument">{{ patron.insType }}</td>
+              <td data-testid="col.brand">{{ patron.brand }}</td>
+              <td data-testid="col.model">{{ patron.model }}</td>
+              <td data-testid="col.issueDate">{{ patron.issueDate }}</td>
               <td *ngIf="isAdmin">
                 <button class="btn btn-sm btn-outline-secondary"
-                    (click)="editarPatron($event, patron.id)">
+                        (click)="editarPatron($event, patron.id)"
+                        data-testid="action.edit">
                   <i class="fas fa-pen-nib me-1"></i> Editar
                 </button>
               </td>
               <td *ngIf="isAdmin">
                 <button class="btn btn-sm btn-outline-danger"
-                        (click)="confirmarEliminacion($event, patron.id)">
+                        (click)="confirmarEliminacion($event, patron.id)"
+                        data-testid="action.delete">
                   <i class="fas fa-trash-alt me-1"></i> Eliminar
                 </button>
               </td>

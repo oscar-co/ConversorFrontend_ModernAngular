@@ -1,63 +1,83 @@
-<form [formGroup]="formCert" (ngSubmit)="submitForm()" class="p-4 shadow rounded bg-white" style="max-width: 700px; margin: auto;">
-  <div class="bg-dark text-white text-center p-3 rounded shadow mb-4">
+<form [formGroup]="formCert" (ngSubmit)="submitForm()"
+      class="p-4 shadow rounded bg-white" style="max-width: 700px; margin: auto;"
+      data-comp="crear-patron" data-testid="create-certificate.form" novalidate>
+
+  <!-- Cabecera -->
+  <div class="bg-dark text-white text-center p-3 rounded shadow mb-4" data-testid="header">
     <h3 class="mb-0"><i class="fas fa-certificate me-2"></i> Crear Patrón / Certificado</h3>
   </div>
 
   <!-- Datos del certificado -->
-  <div class="mb-3">
-    <label class="form-label">Nº Certificado</label>
-    <input formControlName="certificateNumber" type="text" class="form-control">
+  <div class="mb-3" data-testid="field.certificate-number">
+    <label class="form-label" for="certificateNumber">Nº Certificado</label>
+    <input id="certificateNumber" formControlName="certificateNumber" type="text"
+           class="form-control" data-testid="input.certificate-number">
   </div>
 
-  <div class="mb-3">
-    <label class="form-label">Tipo</label>
-    <input formControlName="insType" type="text" class="form-control">
+  <div class="mb-3" data-testid="field.type">
+    <label class="form-label" for="insType">Tipo</label>
+    <input id="insType" formControlName="insType" type="text"
+           class="form-control" data-testid="input.type">
   </div>
 
-  <div class="mb-3">
-    <label class="form-label">Marca</label>
-    <input formControlName="brand" type="text" class="form-control">
+  <div class="mb-3" data-testid="field.brand">
+    <label class="form-label" for="brand">Marca</label>
+    <input id="brand" formControlName="brand" type="text"
+           class="form-control" data-testid="input.brand">
   </div>
 
-  <div class="mb-3">
-    <label class="form-label">Modelo</label>
-    <input formControlName="model" type="text" class="form-control">
+  <div class="mb-3" data-testid="field.model">
+    <label class="form-label" for="model">Modelo</label>
+    <input id="model" formControlName="model" type="text"
+           class="form-control" data-testid="input.model">
   </div>
 
-  <div class="mb-3">
-    <label class="form-label">Identificador</label>
-    <input formControlName="nameIdentify" type="text" class="form-control">
+  <div class="mb-3" data-testid="field.identifier">
+    <label class="form-label" for="nameIdentify">Identificador</label>
+    <input id="nameIdentify" formControlName="nameIdentify" type="text"
+           class="form-control" data-testid="input.identifier">
   </div>
 
-  <div class="mb-3">
-    <label class="form-label">Descripción</label>
-    <textarea formControlName="description" class="form-control"></textarea>
+  <div class="mb-3" data-testid="field.description">
+    <label class="form-label" for="description">Descripción</label>
+    <textarea id="description" formControlName="description"
+              class="form-control" data-testid="textarea.description"></textarea>
   </div>
 
-  <div class="mb-3">
-    <label class="form-label">Fecha emisión</label>
-    <input formControlName="issueDate" type="date" class="form-control">
+  <div class="mb-3" data-testid="field.issue-date">
+    <label class="form-label" for="issueDate">Fecha emisión</label>
+    <input id="issueDate" formControlName="issueDate" type="date"
+           class="form-control" data-testid="input.issue-date">
   </div>
 
-  <div class="mb-3">
-    <label class="form-label">Unidad</label>
-    <input formControlName="unit" type="text" class="form-control">
+  <div class="mb-3" data-testid="field.unit">
+    <label class="form-label" for="unit">Unidad</label>
+    <input id="unit" formControlName="unit" type="text"
+           class="form-control" data-testid="input.unit">
   </div>
 
   <!-- Mediciones -->
-  <div formArrayName="measurements">
-    <div *ngFor="let measurement of measurements.controls; let i = index" [formGroupName]="i">
-      <app-measurement [formGroup]="measurement" (remove)="removeMeasurement(i)"></app-measurement>
+  <div formArrayName="measurements" data-testid="measurements.container">
+    <div *ngFor="let measurement of measurements.controls; let i = index"
+         [formGroupName]="i" class="mb-3"
+         [attr.data-testid]="'measurement.row.' + i">
+
+      <!-- Envoltorio para el componente hijo -->
+      <app-measurement [formGroup]="measurement"
+                       (remove)="removeMeasurement(i)"
+                       [attr.data-testid]="'measurement.component.' + i">
+      </app-measurement>
     </div>
   </div>
 
-  <div class="text-end">
-    <button type="button" class="btn btn-outline-primary" (click)="addMeasurement()">
+  <div class="text-end" data-testid="actions.measurements">
+    <button type="button" class="btn btn-outline-primary"
+            (click)="addMeasurement()" data-testid="btn.add-measurement">
       <i class="fas fa-plus"></i> Añadir Medición
     </button>
   </div>
 
-  <div class="text-center mt-4">
-    <button type="submit" class="btn btn-success">Enviar Certificado</button>
+  <div class="text-center mt-4" data-testid="actions.submit">
+    <button type="submit" class="btn btn-success" data-testid="btn.submit">Enviar Certificado</button>
   </div>
 </form>
